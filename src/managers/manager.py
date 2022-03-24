@@ -169,6 +169,7 @@ class ImageManager(ResourceManager):
             folder, fallback, loader_func=util.debug_arguments(pygame.image.load)
         )
 
+
 class PygameSoundManager(ResourceManager):
     def __init__(self, folder, fallback=None):
         super().__init__(
