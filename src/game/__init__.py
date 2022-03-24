@@ -10,6 +10,7 @@ from animations import Shake, Bounce
 
 class Game:
     def __init__(self):
+        logging.info("Starting game object initialization")
         # Inject self
         pygame.game = self
 
@@ -43,6 +44,8 @@ class Game:
 
         self.clock = pygame.time.Clock()
 
+        logging.info("Finished game object initialization")
+
     def update_animations(self):
         # Have to manually enumerate animations and add conditions
         self.animations.bounce.update()
@@ -52,7 +55,10 @@ class Game:
         """
         Blocking entry point for the entire game
         """
+        logging.info("Staring main game loop")
+
         self.running = True
+
         while self.running:
             self.fps = self.clock.get_fps()
 
@@ -75,6 +81,8 @@ class Game:
             pygame.display.update()
 
             self.clock.tick(60)
+
+        logging.info("Main game loop terminated successfully")
 
     @property
     def level(self):
