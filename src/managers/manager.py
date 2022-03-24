@@ -49,6 +49,11 @@ class ResourceManager:
         ]
 
         for key, group in itertools.groupby(file_groups, lambda x: x.group(1)):
+            if getattr(self, key, None):
+                raise Exception(
+                    f"{folder} -> {key} already exists. perhaps there is already a folder named {key} in this directory"
+                )
+
             matches = list(group)
             if "py" in [m.group(3) for m in matches]:
                 # There is a python file
@@ -168,6 +173,7 @@ class ImageManager(ResourceManager):
         super().__init__(
             folder, fallback, loader_func=util.debug_arguments(pygame.image.load)
         )
+
 
 class PygameSoundManager(ResourceManager):
     def __init__(self, folder, fallback=None):
