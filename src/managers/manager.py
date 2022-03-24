@@ -45,7 +45,7 @@ class ResourceManager:
             m
             for name in files
             if (m := re.match(self.__organization_regex, name))
-            or logging.error(f"{folder} -> {name} is not valid. Ignoring...")
+            or logging.warning(f"{folder} -> {name} is invalid. Ignoring...")
         ]
 
         for key, group in itertools.groupby(file_groups, lambda x: x.group(1)):
