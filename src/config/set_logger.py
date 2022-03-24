@@ -1,7 +1,7 @@
 import logging
 import sys
 
-fmt = "[%(asctime)s] %(filename)s:%(lineno)d %(levelname)s - %(message)s"
+fmt = "[%(asctime)s] %(pathname)s:%(lineno)d %(levelname)s - %(message)s"
 
 logging.basicConfig(
     filename="game.debug.log", level=logging.DEBUG, filemode="w", format=fmt
