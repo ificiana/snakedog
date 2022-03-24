@@ -130,9 +130,10 @@ class TileAlignedEntity(pygame.sprite.Sprite):
         self._update_image()
 
         if self.smooth_move_animation:
-            self.render_loc = 0.8 * self.render_loc + 0.2 * pygame.Vector2(
-                self.rect.x, self.rect.y
-            )
+            vec = pygame.Vector2(self.rect.x, self.rect.y)
+            self.render_loc = 0.83 * self.render_loc + 0.17 * vec
+            if (self.render_loc - vec).length() < 1:
+                self.render_loc = vec
             self.world.surface.blit(self.image, self.render_loc)
         else:
             # this should be called after the rect has been adjusted by the world
