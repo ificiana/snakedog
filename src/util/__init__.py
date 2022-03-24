@@ -28,7 +28,8 @@ def debug_arguments(func):
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except:
-            logging.error(f"{func.__name__}({args}, {kwargs})")
+        except Exception as e:
+            logging.error(e)
+            logging.error(f"^ while calling {func.__name__}({args}, {kwargs})")
 
     return wrapper
