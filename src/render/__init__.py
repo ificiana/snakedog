@@ -37,6 +37,7 @@ class WorldRender:
             (1000, 1000),
             entity_loader_func=levels[level],
             total_moves=30,
+            tile_scale=2,
         )
 
     def render_to(self, screen):

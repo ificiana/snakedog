@@ -346,6 +346,7 @@ class World(pygame.sprite.Group):
         offset=(0, 0),
         entity_loader_func=None,
         total_moves=10,
+        tile_scale=1,
     ):
         super().__init__()
 
@@ -355,6 +356,7 @@ class World(pygame.sprite.Group):
         self.gameover = False
         self.flow = 1
         self.won = False
+        self.tile_scale = tile_scale
 
         self.actions = {}
 
@@ -369,6 +371,8 @@ class World(pygame.sprite.Group):
             dimensions,
             alpha=True,
         )
+        # This should only be done once
+        self.map_layer.zoom = self.tile_scale
         self.tile_width = self.tmx_data.tilewidth
         self.tile_height = self.tmx_data.tileheight
         # create a new surface of dimensions so it matches the map layer
@@ -489,6 +493,7 @@ class World(pygame.sprite.Group):
                 col * self.tile_width,
                 row * self.tile_height,
             )
+            * self.tile_scale
             + self.offset
         )
 
