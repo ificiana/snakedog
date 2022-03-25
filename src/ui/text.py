@@ -19,7 +19,9 @@ class BaseText(pygame.Surface):
         """
         The max size of this text box is calculated by the initial text provided
         """
-        super().__init__(font.render(text)[1].size, *args, **kwargs)
+        super().__init__(
+            (font.render(text)[1].size[0], font.get_sized_height()), *args, **kwargs
+        )
         self.font = font
         self.text_color = text_color
         self.horizontal_center = horizontal_center
