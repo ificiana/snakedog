@@ -33,9 +33,13 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 
 class Font:
-    default = pygame.freetype.Font("resources/fonts/acme.ttf", 32)
+    acme = pygame.freetype.Font("resources/fonts/acme.ttf", 32)
     daemon = pygame.freetype.Font("resources/fonts/daemon.ttf", 32)
     comfortaa = pygame.freetype.Font("resources/fonts/comfortaa.ttf", 32)
+    pixel = pygame.freetype.Font("resources/fonts/pixel.ttf", 32)
+
+
+Font.default = Font.pixel
 
 
 class Color:
