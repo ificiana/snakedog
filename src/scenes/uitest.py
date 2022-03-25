@@ -17,7 +17,7 @@ class UITest(BaseScene):
     def __init__(self, game):
         super().__init__(game)
         self.button = ImageButton(
-            ui.green_button_large, inner_text="PLAY", font=Font.comfortaa, scale=4
+            ui.green_button_large, inner_text="PLAY", font=Font.default, scale=4
         )
 
     def render(self):
