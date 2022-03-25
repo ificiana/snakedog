@@ -50,7 +50,6 @@ class Game:
         self.scene = self.scenes.game_scene
 
         self.level = 1
-
         self.clock = pygame.time.Clock()
 
         logging.info("Finished game object initialization")
