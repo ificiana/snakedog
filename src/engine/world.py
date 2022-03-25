@@ -346,6 +346,7 @@ class World(pygame.sprite.Group):
         offset=(0, 0),
         entity_loader_func=None,
         total_moves=10,
+        tile_scale=1,
     ):
         super().__init__()
 
@@ -355,6 +356,7 @@ class World(pygame.sprite.Group):
         self.gameover = False
         self.flow = 1
         self.won = False
+        self.tile_scale = tile_scale
 
         self.actions = {}
 
@@ -369,6 +371,8 @@ class World(pygame.sprite.Group):
             dimensions,
             alpha=True,
         )
+        # This should only be done once
+        self.map_layer.zoom = self.tile_scale
         self.tile_width = self.tmx_data.tilewidth
         self.tile_height = self.tmx_data.tileheight
         # create a new surface of dimensions so it matches the map layer
@@ -489,6 +493,7 @@ class World(pygame.sprite.Group):
                 col * self.tile_width,
                 row * self.tile_height,
             )
+            * self.tile_scale
             + self.offset
         )
 
@@ -545,21 +550,20 @@ class World(pygame.sprite.Group):
         self.update()
 
         # update ui
+        text = Font.default.render(
+            f"Moves {self.moves}/{self.total_moves} Flow of time {self.flow}",
+            (0, 0, 0),
+        )
         self.surface.blit(
-            Font.default.render(
-                f"Moves {self.moves}/{self.total_moves} Flow of time {self.flow}",
-                True,
-                (0, 0, 0),
-            ),
-            (400, 800),
+            text[0],
+            (400 + text[1].left, 800 + Font.default.size - text[1].top),
         )
         if self.flow == -1:
             self.surface.blit(
                 Font.default.render(
                     f" reversing action at move {self.action_index}",
-                    True,
                     (0, 0, 0),
-                ),
+                )[0],
                 (400, 900),
             )
         if self.gameover:
@@ -568,9 +572,8 @@ class World(pygame.sprite.Group):
                     f"You won. Press R to restart"
                     if self.won
                     else "You lost. Press R to restart",
-                    True,
                     (0, 0, 0),
-                ),
+                )[0],
                 (200, 450),
             )
 

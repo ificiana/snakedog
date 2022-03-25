@@ -7,10 +7,15 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 from . import set_logger
 
 import pygame
-from pygame import font
+from pygame import freetype
 
 pygame.init()
-pygame.font.init()
+pygame.freetype.init()
+
+# def blit_text(self, text_object, font):
+#     return self.blit(text_object[0],)
+
+# pygame.Surface.blit_text =
 
 
 def hex_to_rgb(value):
@@ -33,9 +38,15 @@ class Font:
     daemon = pygame.font.Font("resources/fonts/daemon.ttf", 32)
     comfortaa = pygame.font.Font("resources/fonts/comfortaa.ttf", 32)
     title_logo = pygame.font.Font("resources/fonts/acme.ttf", 72)
+    acme = pygame.freetype.Font("resources/fonts/acme.ttf", 32)
+    pixel = pygame.freetype.Font("resources/fonts/pixel.ttf", 32)
+
+
+Font.default = Font.pixel
+
 
 class Color:
-    BACKGROUND = hex_to_rgb("#460D3A")  # Background Color
+    BACKGROUND = hex_to_rgb("#06181E")  # Background Color
     TEXT_BACKGROUND = hex_to_rgb("#460D3A")  # Text Background
     TEXT_COLOR = hex_to_rgb("#FFFFFF")  # Normal Text Color
     TEXT_INVERSE = hex_to_rgb("#00000")  # Inverted Text Color

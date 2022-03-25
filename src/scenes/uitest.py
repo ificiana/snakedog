@@ -8,20 +8,25 @@ import music
 from .scene import BaseScene
 from config import Color, Font
 
-from ui import Button
+from ui import ImageButton
+from managers import ui
 import keyboard
 
 
 class UITest(BaseScene):
     def __init__(self, game):
         super().__init__(game)
-        self.button = Button(800, 200, "CONTINUE", font=Font.comfortaa)
-        self.button.x = 0
-        self.button.y = 300
+        self.button = ImageButton(
+            ui.green_button_large, inner_text="PLAY", font=Font.default, scale=4
+        )
 
     def render(self):
         self.button.update()
-        self.game.screen.blit(self.button, (self.button.x, self.button.y))
+        self.game.screen.blit(
+            self.button,
+            pygame.Vector2(self.game.screen.get_rect().center)
+            - pygame.Vector2(self.button.get_rect().center),
+        )
 
     def event(self, event):
         if keyboard.is_select(event):

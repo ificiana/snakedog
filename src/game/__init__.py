@@ -31,6 +31,14 @@ class Game:
 
         self.scenes = Scenes()
 
+        self.hotkeys = [
+            self.scenes.start_screen,
+            self.scenes.menu,
+            self.scenes.game_scene,
+            self.scenes.level_select,
+            self.scenes.uitest,
+        ]
+
         class Animations(object):
             bounce = Bounce(120, 0, 20)
             shake = Shake(-5, 5)
@@ -39,7 +47,11 @@ class Game:
         self.animations = Animations()
 
         # set first scene
+<<<<<<< HEAD
         self.scene = self.scenes.titlescreen
+=======
+        self.scene = self.scenes.uitest
+>>>>>>> 5ef8970b6d1328daafa5cec20933c1b1d0edb985
 
         self.level = 1
 
@@ -95,11 +107,28 @@ class Game:
         self._level = level
 
     def event(self, event):
-        pass
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_F1:
+                self.scene = self.scenes.start_screen
+                return True
+            if event.key == pygame.K_F2:
+                self.scene = self.scenes.menu
+                return True
+            if event.key == pygame.K_F3:
+                self.scene = self.scenes.game_scene
+                return True
+            if event.key == pygame.K_F4:
+                self.scene = self.scenes.level_select
+                return True
+            if event.key == pygame.K_F5:
+                self.scene = self.scenes.uitest
+                return True
 
     def draw_fps(self):
         fps_text = config.Font.default.render(
-            "FPS: " + str(int(self.fps)), True, Color.TEXT_COLOR, (0, 0, 0, 20)
+            "FPS: " + str(int(self.fps)), Color.TEXT_COLOR
         )
 
-        self.screen.blit(fps_text, (0, 0))
+        self.screen.blit(
+            fps_text[0], (fps_text[1].left, config.Font.default.size - fps_text[1].top)
+        )
