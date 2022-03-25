@@ -30,6 +30,14 @@ class Game:
 
         self.scenes = Scenes()
 
+        self.hotkeys = [
+            self.scenes.start_screen,
+            self.scenes.menu,
+            self.scenes.game_scene,
+            self.scenes.level_select,
+            self.scenes.uitest,
+        ]
+
         class Animations(object):
             bounce = Bounce(120, 0, 20)
             shake = Shake(-5, 5)
@@ -38,7 +46,7 @@ class Game:
         self.animations = Animations()
 
         # set first scene
-        self.scene = self.scenes.game_scene
+        self.scene = self.scenes.uitest
 
         self.level = 1
 
@@ -94,7 +102,22 @@ class Game:
         self._level = level
 
     def event(self, event):
-        pass
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_F1:
+                self.scene = self.scenes.start_screen
+                return True
+            if event.key == pygame.K_F2:
+                self.scene = self.scenes.menu
+                return True
+            if event.key == pygame.K_F3:
+                self.scene = self.scenes.game_scene
+                return True
+            if event.key == pygame.K_F4:
+                self.scene = self.scenes.level_select
+                return True
+            if event.key == pygame.K_F5:
+                self.scene = self.scenes.uitest
+                return True
 
     def draw_fps(self):
         fps_text = config.Font.default.render(
