@@ -17,14 +17,12 @@ class LevelSelect(BaseScene):
             self.levelpos.append([])
             for level in item:  # 2 level
 
-                level = self.font.render(
-                    str(level), True, Color.TEXT_COLOR, Color.BACKGROUND
-                )
+                level = self.font.render(str(level), Color.TEXT_COLOR, Color.BACKGROUND)
                 levelpos = (30 + i * 50, 30 + j * 30)
-                level_rect = level.get_rect()
+                level_rect = level[1]
                 level_rect.center = levelpos
                 self.levelpos[-1].append(levelpos)
-                self.game.screen.blit(level, level_rect)
+                self.game.screen.blit(*level)
                 j += 1
             i += 1
             j = 0
@@ -48,10 +46,9 @@ class LevelSelect(BaseScene):
 
                 level = self.font.render(
                     str(level),
-                    True,
                     Color.TEXT_COLOR,
                     Color.BACKGROUND if not [j, i] == self.curPos else Color.TEXT_BLUE,
-                )
+                )[0]
                 levelpos = (30 + i * 50, 30 + j * 30)
                 level_rect = level.get_rect()
                 level_rect.center = levelpos

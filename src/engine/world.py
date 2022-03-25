@@ -550,21 +550,20 @@ class World(pygame.sprite.Group):
         self.update()
 
         # update ui
+        text = Font.default.render(
+            f"Moves {self.moves}/{self.total_moves} Flow of time {self.flow}",
+            (0, 0, 0),
+        )
         self.surface.blit(
-            Font.default.render(
-                f"Moves {self.moves}/{self.total_moves} Flow of time {self.flow}",
-                True,
-                (0, 0, 0),
-            ),
-            (400, 800),
+            text[0],
+            (400 + text[1].left, 800 + Font.default.size - text[1].top),
         )
         if self.flow == -1:
             self.surface.blit(
                 Font.default.render(
                     f" reversing action at move {self.action_index}",
-                    True,
                     (0, 0, 0),
-                ),
+                )[0],
                 (400, 900),
             )
         if self.gameover:
@@ -573,9 +572,8 @@ class World(pygame.sprite.Group):
                     f"You won. Press R to restart"
                     if self.won
                     else "You lost. Press R to restart",
-                    True,
                     (0, 0, 0),
-                ),
+                )[0],
                 (200, 450),
             )
 

@@ -121,7 +121,9 @@ class Game:
 
     def draw_fps(self):
         fps_text = config.Font.default.render(
-            "FPS: " + str(int(self.fps)), True, Color.TEXT_COLOR, (0, 0, 0, 20)
+            "FPS: " + str(int(self.fps)), Color.TEXT_COLOR
         )
 
-        self.screen.blit(fps_text, (0, 0))
+        self.screen.blit(
+            fps_text[0], (fps_text[1].left, config.Font.default.size - fps_text[1].top)
+        )

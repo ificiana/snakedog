@@ -2,9 +2,10 @@ import pygame
 import logging
 
 from config import Color, Font
+from managers import ui
 
 
-class Button(pygame.Surface):
+class BaseButton(pygame.Surface):
     """
     Center text by default
     """
@@ -14,18 +15,18 @@ class Button(pygame.Surface):
         width,
         height,
         inner_text="Button",
-        text_color=None,
-        font=None,
+        text_color=Color.TEXT_COLOR,
+        font=Font.default,
         button_name=None,
-        button_group=None,
     ):
         super().__init__((width, height), pygame.SRCALPHA)
 
         self.width, self.height = width, height
-        self.text_color = text_color or Color.TEXT_COLOR
-        self.font = font or Font.default
+        self.text_color = text_color
+        self.font = font
         self.text = inner_text
         self.selected = False
+        self.pressed = False
 
         self.button_name = button_name or "Unnamed button"
 
@@ -35,30 +36,45 @@ class Button(pygame.Surface):
 
     @text.setter
     def text(self, value):
-        self._text = " ".join(list(value))
-        self.fw, self.fh = self.font.size(self.text)
+        self._text = value
+        self.font_render = self.font.render(self.text, self.text_color)
+        self.font_render[1].center = self.get_rect().center
 
     def press(self):
+        self.pressed = True
         logging.info(f"Button {self.button_name} pressed")
+
+    def unpress(self):
+        self.pressed = False
+
+    def render_text(self):
+        self.blit(*self.font_render)
 
     def update(self):
         self.fill((0, 0, 0, 0))
 
-        text = self.font.render(
-            self.text,
-            True,
-            self.text_color,
-        )
+        self.render_text()
 
-        font_rect = pygame.Rect(0, 0, self.fw, self.fh)
-        font_rect.center = self.get_rect().center
 
+class ImageButton(BaseButton):
+    def __init__(self, base_image, pressed_image=None, scale=1, *args, **kwargs):
+        width, height = base_image.get_size()
+        super().__init__(width, height, *args, **kwargs)
+        self.base_image = base_image
+        self.pressed_image = pressed_image or base_image
+        self.select_arrow = ui.button_select
+
+    def update(self):
+        self.fill((0, 0, 0, 0))
+
+        # display base image
+        if self.pressed:
+            self.blit(self.base_image, (0, 0))
+        else:
+            self.blit(self.pressed_image, (0, 0))
+
+        # selected arrow
         if self.selected:
-            surf = pygame.Surface((60, 60))
-            surf.fill((255, 255, 255))
-            rect = pygame.Rect(0, 0, 60, 60)
-            rect.right = font_rect.left
-            rect.centery = font_rect.centery
-            self.blit(surf, rect)
+            self.blit(self.select_arrow, (0, 0))
 
-        self.blit(text, font_rect)
+        self.render_text()
