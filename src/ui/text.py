@@ -46,8 +46,11 @@ class BaseText(pygame.Surface):
             self.render_cache[0],
             (
                 x
-                + self.render_cache[1].left
-                - (self.render_cache[1].width // 2 if self.horizontal_center else 0),
+                - (
+                    self.render_cache[1].width // 2 + self.render_cache[1].left
+                    if self.horizontal_center
+                    else 0
+                ),
                 y + self.font.size - self.render_cache[1].top,
             ),
         )
