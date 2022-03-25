@@ -97,6 +97,7 @@ class TileAlignedEntity(pygame.sprite.Sprite):
         self.pushable = pushable
         self.image = image
         self.images = images
+        self.scale_sprite = lambda x, size=(64, 64): pygame.transform.scale(x, size)
 
         if not image:
             raise Exception("Base image required for bounding box calculation")
@@ -212,6 +213,10 @@ class Player(TileAlignedEntity):
         self.push_frames = 0
         self.player_dead = False
         self.inventory = []
+        self.move_axis = 0
+        self.moves = [images.sprites.player.moves_a, images.sprites.player.moves_b]
+        self.move = [self.scale_sprite(self.moves[1].moves[0])]
+        self.move_phase = 0
 
     def event(self, event):
         actions = []
@@ -221,6 +226,9 @@ class Player(TileAlignedEntity):
             if dxdy:
                 dx, dy = dxdy
                 nx, ny = self.col + dx, self.row + dy
+                self.move_axis = dx + 2*dy
+                self.move = self._move()
+                self.move_phase += 1
                 if not self.world.is_wall(nx, ny):
                     entity = self.world.tile_entity_at(nx, ny)
                     if entity:
@@ -284,12 +292,31 @@ class Player(TileAlignedEntity):
 
             self.world.commit_action(func)
 
+    def _move(self):
+        return {
+            0: [self.scale_sprite(self.moves[1].moves[0])],
+            -1: [self.scale_sprite(self.moves[1].moves[i]) for i in range(3, 16, 4)],
+            1: [self.scale_sprite(self.moves[1].moves[i]) for i in range(2, 15, 4)],
+            -2: [self.scale_sprite(self.moves[1].moves[i]) for i in range(1, 14, 4)],
+            2: [self.scale_sprite(self.moves[1].moves[i]) for i in range(0, 13, 4)],
+        }.get(self.move_axis, self.image)
+
+    def _push(self):
+        return {
+            0: self.scale_sprite(self.moves[1].moves[0]),
+            -1: self.scale_sprite(self.moves[0].moves[16]),
+            1: self.scale_sprite(self.moves[0].moves[11]),
+            -2: self.scale_sprite(self.moves[1].moves[5]),
+            2: self.scale_sprite(self.moves[0].moves[23]),
+        }.get(self.move_axis, self.image)
+
     def _update_image(self):
+        if self.move_phase >= len(self.move):
+            self.move_phase = 0
+        self.image = self.move[self.move_phase]
         self.push_frames -= 1
         if self.push_frames > 0:
-            self.image = self.images.player_stick_push
-        else:
-            self.image = self.images.player_stick
+            self.image = self._push()
 
     def kill_player(self):
         self.player_dead = True
