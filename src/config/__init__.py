@@ -34,7 +34,7 @@ class Font:
 
 
 class Color:
-    BACKGROUND = hex_to_rgb("#460D3A")  # Background Color
+    BACKGROUND = hex_to_rgb("#06181E")  # Background Color
     TEXT_BACKGROUND = hex_to_rgb("#460D3A")  # Text Background
     TEXT_COLOR = hex_to_rgb("#FFFFFF")  # Normal Text Color
     TEXT_INVERSE = hex_to_rgb("#00000")  # Inverted Text Color
