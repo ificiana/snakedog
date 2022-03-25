@@ -1,4 +1,4 @@
-.ase
+*.ase
 .vs
 # ignore single letter files
 ?.*

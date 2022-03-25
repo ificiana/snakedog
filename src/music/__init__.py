@@ -24,6 +24,8 @@ class music:
                     pygame.mixer.music.play(start=pattern)
                 else:
                     pygame.mixer.music.stop()
-
+    def stopBgm():
+        mixer.music.stop()
+        
     def update():
         pass

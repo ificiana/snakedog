@@ -1,5 +1,6 @@
 # setup stuff here
 import os
+from random import randrange
 
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
@@ -33,9 +34,11 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 
 class Font:
+    default = pygame.font.Font("resources/fonts/acme.ttf", 32)
+    daemon = pygame.font.Font("resources/fonts/daemon.ttf", 32)
+    comfortaa = pygame.font.Font("resources/fonts/comfortaa.ttf", 32)
+    title_logo = pygame.font.Font("resources/fonts/acme.ttf", 72)
     acme = pygame.freetype.Font("resources/fonts/acme.ttf", 32)
-    daemon = pygame.freetype.Font("resources/fonts/daemon.ttf", 32)
-    comfortaa = pygame.freetype.Font("resources/fonts/comfortaa.ttf", 32)
     pixel = pygame.freetype.Font("resources/fonts/pixel.ttf", 32)
 
 
@@ -52,3 +55,7 @@ class Color:
     TEXT_BLUE = hex_to_rgb("#0000FF")  # Things are blue
     BORDER_ONE = hex_to_rgb("#0ED1F0")  # Border Color One
     BORDER_TWO = hex_to_rgb("#F0CD00")  # Border Color Two
+    
+    def randomColor():
+        print("New COlor.")
+        return tuple(int(randrange(0,255)),int(randrange(0,255)),int(randrange(0,255)))
