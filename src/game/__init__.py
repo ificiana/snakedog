@@ -47,14 +47,9 @@ class Game:
         self.animations = Animations()
 
         # set first scene
-<<<<<<< HEAD
         self.scene = self.scenes.titlescreen
-=======
         self.scene = self.scenes.uitest
->>>>>>> 5ef8970b6d1328daafa5cec20933c1b1d0edb985
-
         self.level = 1
-
         self.clock = pygame.time.Clock()
 
         logging.info("Finished game object initialization")
