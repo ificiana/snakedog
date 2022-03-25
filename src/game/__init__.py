@@ -22,7 +22,7 @@ class Game:
 
         # Add many more screens later
         class Scenes(object):
-            titlescreen =  scenes.TitleScreen(self)
+            titlescreen = scenes.TitleScreen(self)
             start_screen = scenes.StartScreen(self)
             menu = scenes.Menu(self)
             game_scene = scenes.GameScene(self)
@@ -47,11 +47,7 @@ class Game:
         self.animations = Animations()
 
         # set first scene
-<<<<<<< HEAD
         self.scene = self.scenes.titlescreen
-=======
-        self.scene = self.scenes.uitest
->>>>>>> 5ef8970b6d1328daafa5cec20933c1b1d0edb985
 
         self.level = 1
 
