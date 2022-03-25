@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="67" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="3" nextobjectid="1">
- <tileset firstgid="301" source="../tilesets/day.tsx"/>
- <layer id="1" name="background" width="67" height="20" visible="0" locked="1">
-  <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20PBxQAAAAAwIcBFPAAAQ==
-  </data>
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="8" tileheight="8" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" name="Dungeon" tilewidth="8" tileheight="8" tilecount="3472" columns="56">
+  <image source="../../tilesets/source/Tile.png" width="448" height="500"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="16" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,0,0,
+0,0,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,0,0,
+0,0,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,0,0,
+0,0,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,0,0,
+0,0,1469,1469,1469,1469,1469,2641,2642,1469,1469,1469,1469,1469,0,0,
+0,0,1469,1469,1469,1469,1469,2697,2698,1469,1469,1469,1469,1469,0,0,
+0,0,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,0,0,
+0,0,1469,1469,1469,1469,1469,1469,0,0,1469,1469,1469,1469,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
  </layer>
- <layer id="2" name="collision" width="67" height="20">
-  <data encoding="base64" compression="zlib">
-   eJztV1EOgyAMlQOJcT+4uB/1DNvuf5PBQhfWUHFLISXykhcTIUIfr7T2qut6y6nxrYPjaLmelBekydXyrDBNiw9yaDH4fHPPxXILnpKRQ4taYsfI6YvawKUF5ANA+xypCVxabMgLWnCOuH3qCG8ZfAE9m1Rf4POnyOGLxes8CdDibvfwsHwGe8mtRegB0CLlC6i7/YG5nCjhC8AQ5OBejMavx1V/Yx6g1s3ti7COwPck3p+l7otfvb53lv+OpVDKFykflL4bYuDSAmozjmdW32NUzBJ6cy4tDDFv9L5Ylfz/kaNazCrek+HeDM+j3ksk7i8bab4AO9Fxdg==
-  </data>
+ <layer id="2" name="collision" width="16" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,3221227557,3221227552,3221227552,3221227552,3221227552,3221227552,3221227552,3221227552,3221227552,3221227552,3221227552,3221227552,3221227552,1610614821,0,
+0,2684356640,0,0,0,0,0,0,0,0,0,0,0,0,1610614816,0,
+0,2684356640,0,0,0,0,0,0,0,0,0,0,0,0,1610614816,0,
+0,2684356640,0,0,0,0,0,0,0,0,0,0,0,0,1610614816,0,
+0,2684356640,0,0,0,0,0,0,0,0,0,0,0,0,1610614816,0,
+0,2684356640,0,0,0,0,0,0,0,0,0,0,0,0,1610614816,0,
+0,2684356640,0,0,0,0,0,0,0,0,0,0,0,0,1610614816,0,
+0,2684356640,0,0,0,0,0,0,0,0,0,0,0,0,1610614816,0,
+0,2684356640,0,0,0,0,0,0,629,2684355189,0,0,0,0,1610614816,0,
+0,2684356645,2079,2080,2081,2082,2083,2084,2085,2684356645,2079,2080,2080,2080,2085,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
  </layer>
 </map>
